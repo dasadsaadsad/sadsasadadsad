@@ -16,17 +16,11 @@ except Exception as e:
     logging.error(f'Ошибка при инициализации базы данных SQLite: {e}')
 
 try:
-    # Создание клиента Telegram
+    # Используйте API ID и HASH из config
     client = TelegramClient('dsa8yday8das8ydd', config.api_id, config.api_hash)
     logging.info('Клиент Telegram успешно создан')
 except Exception as e:
     logging.error(f'Ошибка при создании клиента Telegram: {e}')
-
-api_id = 24120751
-api_hash = 'acaa33628ae3a74cf956a6826e7779de'
-phone = '+380 93 209 68 65'
-
-client = TelegramClient("dsa8yday8das8ydd", api_id, api_hash)
 
 @client.on(events.NewMessage(chats=config.channel_usernames))
 async def handler(event):
@@ -49,7 +43,7 @@ async def handler(event):
                 message_content = f'{user_link} впервые написал в чат "{chat_title}": {message_text}'
                 
                 # Отправляем сообщение с информацией о новом пользователе, названии чата и тексте сообщения
-                await client.send_message(-1002133595454, message_content, parse_mode='md')
+                await client.send_message(-1002353242489, message_content, parse_mode='md')
                 logging.info(f'Сообщение о новом пользователе {user_id} отправлено')
             except Exception as e:
                 logging.error(f'Ошибка при отправке сообщения о новом пользователе {user_id}: {e}')
